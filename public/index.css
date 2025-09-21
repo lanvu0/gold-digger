@@ -159,6 +159,7 @@ dialog {
     background-image: linear-gradient(180deg, var(--brown) 70%, var(--dark-gold));
     color: var(--gold);
     padding: 1.5em;
+    text-align: center;
 }
 
 dialog h2 {

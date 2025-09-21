@@ -60,15 +60,7 @@ const server = http.createServer(async (req, res) => {
         // Serve public assets
         try {
             const data = await fs.readFile(filePath);
-
             const contentType = getContentType(filePath);
-            console.log(filePath);
-            console.log(req.url);
-            // if (contentType === 'text/event-stream') {
-            //     // Open live connection to get gold price
-            // } else {
-
-            // }
 
             res.writeHead(200, { 'Content-Type': contentType });
             res.end(data)
@@ -87,12 +79,54 @@ const server = http.createServer(async (req, res) => {
            
     } else if (req.method === 'POST' && req.url === '/invest') {
         // Receive amount to invest
-        const amountPaid = JSON.parse(req.headers.body);
 
-        const investObj = populateInvestObj(investAmount);
-        
+        // Hold body chunks
+        const chunks = [];
 
-    }
+        // Listen for 'data' event
+        req.on('data', chunk => chunks.push(chunk));
+
+        // Catch network errors during request stream
+        req.on('error', (err) => {
+            console.error(`Request stream error: ${err}`);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Internal Server Error' }));
+        })
+
+        // Listen for 'end' event (all data has arrived)
+        req.on('end', () => {
+            try {
+                // Concatenate all buffer chunks into one, then convert to string
+                const bodyString = Buffer.concat(chunks).toString();
+
+                // Handle case where body is empty
+                if (!bodyString) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    return res.end(JSON.stringify({ message: 'Request bodycannot be empty' }));
+                }
+
+                // Parse JSON string into object
+                const parsedData = JSON.parse(bodyString);
+
+                console.log('Received data:', parsedData);
+
+                // Populate the object
+                const investObj = populateInvestObj(parsedData);
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
+                    message: 'Investment received successfully',
+                    body: investObj
+                }));
+
+                console.log(investObj);
+            } catch (err) {
+                console.error(`Error processing request: ${err}`);
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'Invalid JSON data received' }));
+            }
+        })  
+    };
     
 })
 

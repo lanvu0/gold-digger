@@ -1,14 +1,8 @@
-
-
-export function populateInvestObj(amountPaid) {
-    // Get timestamp
-    
-    const goldPrice = getGoldPrice();
-
+export function populateInvestObj(data) {
     return {
         timestamp: new Date(),
-        amountPaid: amountPaid,
-        pricePerOz: goldPrice,
-        goldSold: amountPaid / goldPrice
+        amountPaid: data.amountPaid,
+        pricePerOz: data.goldPrice,
+        goldSold: parseFloat((data.amountPaid / data.goldPrice).toFixed(4))
     };
 }
