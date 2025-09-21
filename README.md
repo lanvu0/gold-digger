@@ -6,12 +6,12 @@ GoldDigger is a full-stack web application that simulates a real-time gold inves
 
 ## Key Features
 
-- **Real-Time Price Updates**: Utilizes **Server-Sent Events (SSE)** to push live, simulated gold prices from the server to the client every two seconds. This provides a persistent, one-way connection that is more efficient than traditional polling for this use case.
+- **Real-Time Price Updates**: Utilises **Server-Sent Events (SSE)** to push live, simulated gold prices from the server to the client every two seconds. This provides a persistent, one-way connection that is more efficient than traditional polling for this use case.
 - **Dependency-Free Backend**: The server is built from the ground up using only native **Node.js modules** (`http`, `fs/promises`, `path`), demonstrating a strong understanding of core backend concepts without relying on external frameworks like Express.
 - **RESTful API Endpoint**: Features a `POST /invest` endpoint that accepts investment data, processes the transaction, and persists it to a local data store.
 - **Data Persistence**: Investment transactions are saved to a `clientData.json` file, which acts as a simple, flat-file database.
 - **Interactive Frontend**: The user interface is built with vanilla HTML, CSS, and JavaScript (ES Modules). It uses the `fetch` API for asynchronous POST requests and the native `<dialog>` element for a modern, accessible confirmation modal.
-- **Modular Codebase**: The backend logic is organized into separate utility modules for clarity and maintainability (e.g., getting content types, simulating price data, and populating data objects).
+- **Modular Codebase**: The backend logic is organised into separate utility modules for clarity and maintainability (e.g., getting content types, simulating price data, and populating data objects).
 
 ## Tech Stack
 
