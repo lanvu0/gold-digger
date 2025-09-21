@@ -42,8 +42,8 @@ To run this project on your local machine, follow these steps:
 
 1.  **Clone the repository:**
     ```sh
-    git clone <your-repository-url>
-    cd <your-repository-name>
+    git clone https://github.com/lanvu0/gold-digger.git
+    cd gold-digger
     ```
 
 2.  **Install dependencies (if any):**
