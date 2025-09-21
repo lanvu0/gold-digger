@@ -4,7 +4,6 @@ import path from 'node:path';
 import { getContentType } from './utils/getContentType.js';
 import { populateInvestObj } from './utils/populateInvestObj.js';
 import { getGoldPrice } from './utils/getGoldPrice.js';
-import { clientData } from './data/data.js';
 
 const PORT = 8000;
 
@@ -95,7 +94,7 @@ const server = http.createServer(async (req, res) => {
         })
 
         // Listen for 'end' event (all data has arrived)
-        req.on('end', () => {
+        req.on('end', async () => {
             try {
                 // Concatenate all buffer chunks into one, then convert to string
                 const bodyString = Buffer.concat(chunks).toString();
@@ -114,9 +113,17 @@ const server = http.createServer(async (req, res) => {
                 // Populate the object
                 const investObj = populateInvestObj(parsedData);
 
-                // Write to data.js
-                clientData.push(investObj);
-                console.log(clientData);
+                const dataFilePath = path.join('data', 'clientData.json');
+                // Get current JSON data
+                const fileContent = await fs.readFile(dataFilePath, 'utf8');
+                const allClientData = JSON.parse(fileContent);
+
+                // Push new investObj into JSON
+                allClientData.push(investObj);
+
+                await fs.writeFile(dataFilePath, JSON.stringify(allClientData, null, 2));
+
+                console.log('Successfully saved to clientData.json');
 
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({
