@@ -3,10 +3,46 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getContentType } from './utils/getContentType.js';
 import { populateInvestObj } from './utils/populateInvestObj.js';
+import { getGoldPrice } from './utils/getGoldPrice.js';
 
 const PORT = 8000;
 
 const server = http.createServer(async (req, res) => {
+    console.log(`Request for: ${req.url}`);
+
+    // Open connection for live gold price stream
+    if (req.url === '/gold-price-stream') {
+        res.writeHead(200, {
+            'Content-Type': 'text/event-stream',
+            'Connection': 'keep-alive',
+            'Cache-Control': 'no-cache'
+        });
+
+        const sendPrice = async () => {
+            try {
+                const priceData = getGoldPrice();
+                res.write(`data: ${JSON.stringify({ event: 'gold-price-updated', price: priceData})}\n\n`);
+            } catch (err) {
+                console.error(`Error fetching gold price: ${err}`);
+                res.write(`event: error\ndata: ${JSON.stringify({ message: 'Failed to fetch price' })}\n\n`);
+            }
+        };
+
+        // Send price immediately on connection
+        sendPrice();
+
+        // Set up interval to update price every 2 seconds
+        const intervalId = setInterval(sendPrice, 2000);
+
+        // Clean up when client disconnects
+        req.on('close', () => {
+            console.log('Client disconnected from SSE stream');
+            clearInterval(intervalId);
+            res.end();
+        })
+        return;
+    }
+
     // Get absolute path to the public dir
     const publicDir = path.resolve('./public');
     let filePath = path.join(publicDir, req.url === '/' ? 'index.html' : req.url);
@@ -20,12 +56,19 @@ const server = http.createServer(async (req, res) => {
         return;
     }
     
-    if (req.method === 'GET') {
+    if (req.method === 'GET') {    
         // Serve public assets
         try {
             const data = await fs.readFile(filePath);
 
             const contentType = getContentType(filePath);
+            console.log(filePath);
+            console.log(req.url);
+            // if (contentType === 'text/event-stream') {
+            //     // Open live connection to get gold price
+            // } else {
+
+            // }
 
             res.writeHead(200, { 'Content-Type': contentType });
             res.end(data)
