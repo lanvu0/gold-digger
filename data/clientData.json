@@ -19,5 +19,40 @@
     "amountPaid": 1,
     "pricePerOz": 5613,
     "goldSold": 0.0002
+  },
+  {
+    "uuid": "6da5cbdc-e6c4-4d34-a483-b4419b291ace",
+    "timestamp": "2025-09-21T12:43:36.664Z",
+    "amountPaid": 10000,
+    "pricePerOz": 5608.46,
+    "goldSold": 1.783
+  },
+  {
+    "uuid": "9f0b62db-90a8-4204-b4d7-71ee744fadc6",
+    "timestamp": "2025-09-21T12:43:43.682Z",
+    "amountPaid": 2000,
+    "pricePerOz": 5607.68,
+    "goldSold": 0.3567
+  },
+  {
+    "uuid": "242c052a-63cb-4464-83f9-4a9b63161b1d",
+    "timestamp": "2025-09-21T12:46:22.658Z",
+    "amountPaid": 10000,
+    "pricePerOz": 5609.36,
+    "goldSold": 1.7827
+  },
+  {
+    "uuid": "878e6a58-57d2-40ec-89f3-313c8c036187",
+    "timestamp": "2025-09-21T12:46:25.549Z",
+    "amountPaid": 20000,
+    "pricePerOz": 5610.51,
+    "goldSold": 3.5647
+  },
+  {
+    "uuid": "15005b14-c495-47a5-8b1c-7e441b851230",
+    "timestamp": "2025-09-21T12:46:27.671Z",
+    "amountPaid": 5,
+    "pricePerOz": 5609.79,
+    "goldSold": 0.0009
   }
 ]
