@@ -9,5 +9,9 @@
     "start": "node server.js"
   },
   "author": "Lan Vu",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^13.0.0",
+    "uuidjs": "^5.1.0"
+  }
 }

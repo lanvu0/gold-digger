@@ -4,6 +4,7 @@ import path from 'node:path';
 import { getContentType } from './utils/getContentType.js';
 import { populateInvestObj } from './utils/populateInvestObj.js';
 import { getGoldPrice } from './utils/getGoldPrice.js';
+import { clientData } from './data/data.js';
 
 const PORT = 8000;
 
@@ -113,13 +114,15 @@ const server = http.createServer(async (req, res) => {
                 // Populate the object
                 const investObj = populateInvestObj(parsedData);
 
+                // Write to data.js
+                clientData.push(investObj);
+                console.log(clientData);
+
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({
                     message: 'Investment received successfully',
                     body: investObj
                 }));
-
-                console.log(investObj);
             } catch (err) {
                 console.error(`Error processing request: ${err}`);
                 res.writeHead(400, { 'Content-Type': 'application/json' });
