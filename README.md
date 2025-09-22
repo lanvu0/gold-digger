@@ -35,7 +35,7 @@ This project was built from the ground up to showcase a strong understanding of 
 *   **`EventSource` API:** The client subscribes to the backend's SSE stream using the native `EventSource` interface to receive live price data.
 *   **Fetch API:** Asynchronous `POST` and `GET` requests are handled using the `fetch` API with `async/await` for clean, modern code.
 *   **Dynamic DOM Manipulation:** The transaction history and investment summaries are dynamically generated and injected into the DOM.
-*   **Semantic HTML & Accessibility:** The application utilizes semantic tags (`<main>`, `<section>`, `<dialog>`) and ARIA attributes to ensure a good user experience and accessibility.
+*   **Semantic HTML & Accessibility:** The application utilises semantic tags (`<main>`, `<section>`, `<dialog>`) and ARIA attributes to ensure a good user experience and accessibility.
 
 ## How It Works
 
