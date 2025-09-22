@@ -118,16 +118,14 @@ transactionBtn.addEventListener('click', async () => {
                 cellPrice.textContent = `$${investObj.pricePerOz.toFixed(2)}`;
             })
         };
-
+        
         transactionHistoryDialog.showModal();
+        transactionHistoryDialog.scrollTop = 0;
 
     } catch (err) {
         console.error(err);
         alert('Could not load transaction history.');
     }
-
-    
-
 })
 
 // Event listener to close dialog modal
