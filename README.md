@@ -6,7 +6,7 @@ GoldDigger is a full-stack web application designed to simulate investing in gol
 
 ---
 
-![GoldDigger Application Screenshot](./demo.gif)
+![GoldDigger Application Screenshot](./dem.gif)
 
 ## Features
 
