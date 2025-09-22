@@ -5,7 +5,7 @@ import { getContentType } from './utils/getContentType.js';
 import { populateInvestObj } from './utils/populateInvestObj.js';
 import { getGoldPrice } from './utils/getGoldPrice.js';
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const server = http.createServer(async (req, res) => {
     console.log(`Request for: ${req.url}`);
