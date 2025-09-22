@@ -57,6 +57,25 @@ const server = http.createServer(async (req, res) => {
     }
     
     if (req.method === 'GET') {    
+
+        // Handle request for transaction data
+        if (req.url === '/transactions') {
+            try {
+                const dataFilePath = path.join('data', 'clientData.json');
+                const fileContent = await fs.readFile(dataFilePath, 'utf8');
+                
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(fileContent);
+            } catch (err) {
+                console.error(`Could not read transaction data: ${err}`);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'Could not retrieve transaction history' }));
+            }
+            return;
+        }
+
+
+
         // Serve public assets
         try {
             const data = await fs.readFile(filePath);

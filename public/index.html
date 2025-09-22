@@ -30,11 +30,31 @@
             </div>
             <button id="invest-btn" class="invest-btn" aria-label="Invest in gold now">Invest Now!</button>
         </form>
+        <button id="transaction-btn" class="invest-btn" aria-label="Show transaction history">Transaction History</button>
         <!-- This dialog opens after a successful purchase -->
-        <dialog class="outputs" role="dialog" aria-labelledby="dialog-title" aria-describedby="investment-summary" lang="en">
+        <dialog id="investment-summary-dialog" class="outputs" role="dialog" aria-labelledby="dialog-title" aria-describedby="investment-summary" lang="en">
             <h2>Summary</h2>
             <p id="investment-summary">You just bought --- ounces (ozt) for $----. The sale has been executed and you will receive documentation shortly.</p>
-            <button id="close-btn" aria-label="Close dialog and return to main page" autofocus>OK</button>
+            <button class="close-btn" aria-label="Close dialog and return to main page" autofocus>OK</button>
+        </dialog>
+        <dialog id="transaction-history-dialog" class="outputs" role="dialog" aria-labelledby="dialog-title" aria-describedby="transaction-history" lang="en">
+            <h2>Transaction History</h2>
+            <div id="transaction-history">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount Paid</th>
+                            <th>Gold (oz)</th>
+                            <th>Price per Oz</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <button class="close-btn" aria-label="Close dialog and return to main page" autofocus>OK</button>
         </dialog>
         <p class="footnote">* 1oz = 1 troy ounce of 24 Carat Gold</p>
     </main>

@@ -152,7 +152,6 @@ input::placeholder {
 }
 
 dialog {
-    max-width: 280px;
     border-radius: 10px;
     border: 2px solid var(--dark-gold);
     background-color: var(--brown);
@@ -161,6 +160,38 @@ dialog {
     padding: 1.5em;
     text-align: center;
 }
+
+#transaction-history-dialog {
+    max-height: 80vh;
+    max-width: 500px;
+}
+
+#transaction-history {
+    overflow-y: auto;
+    flex-grow: 1;
+    border-top: 1px solid var(--dark-gold);
+    border-bottom: 1px solid var(--dark-gold);
+    padding: 0.5em 0;
+    margin: 1em 0;
+    min-height: 0;
+}
+
+#transaction-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+#transaction-history th, #transaction-history td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#investment-summary-dialog {
+    max-width: 300px;
+}
+
 
 dialog h2 {
     text-align: center;
@@ -205,3 +236,4 @@ dialog button {
             #666);
     opacity: 0.50;
 }
+
